@@ -53,5 +53,13 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: npm install
-      - name: Build step placeholder
-        run: echo "Pretend this packages the app — real build steps come later"
+      - name: Create build artifact
+        run: |
+          mkdir dist
+          cp app.js package.json dist/
+          cd dist && zip -r ../greeting-app.zip .
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: greeting-app-build
+          path: greeting-app.zip
