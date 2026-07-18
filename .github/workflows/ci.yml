@@ -63,8 +63,8 @@ jobs:
         with:
           name: greeting-app-build
           path: greeting-app.zip
-          
-   deploy_staging:
+
+  deploy_staging:
     needs: build
     runs-on: ubuntu-latest
     environment: staging
