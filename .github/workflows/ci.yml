@@ -72,6 +72,7 @@ jobs:
       - name: "Deploy to staging (placeholder)"
         run: echo "Pretend this deploys greeting-app.zip to staging"
 
+        
   deploy_production:
     needs: deploy_staging
     runs-on: ubuntu-latest
