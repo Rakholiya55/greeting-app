@@ -63,3 +63,19 @@ jobs:
         with:
           name: greeting-app-build
           path: greeting-app.zip
+          
+   deploy_staging:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: "Deploy to staging (placeholder)"
+        run: echo "Pretend this deploys greeting-app.zip to staging"
+
+  deploy_production:
+    needs: deploy_staging
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: "Deploy to production (placeholder)"
+        run: echo "Pretend this deploys greeting-app.zip to production"
