@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greeting-app-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: greeting-app
+  template:
+    metadata:
+      labels:
+        app: greeting-app
+    spec:
+      containers:
+        - name: greeting-app
+          image: rakholiya5500/greeting-app:latest
