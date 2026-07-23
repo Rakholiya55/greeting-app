@@ -68,13 +68,31 @@ jobs:
     runs-on: ubuntu-latest
     environment: staging
     steps:
-      - name: "Deploy to staging (placeholder)"
-        run: echo "Pretend this deploys greeting-app.zip to staging"
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --name learning-cluster --region us-east-1
+      - name: Deploy
+        run: kubectl apply -f deployment.yaml && kubectl apply -f service.yaml
 
   deploy_production:
     needs: deploy_staging
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: "Deploy to production (placeholder)"
-        run: echo "Pretend this deploys greeting-app.zip to production"
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --name learning-cluster --region us-east-1
+      - name: Deploy
+        run: |
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
